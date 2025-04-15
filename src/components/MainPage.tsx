@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Spinner } from "react-bootstrap"
-import SingleArticle from "./SingleArticle";
-import { ArticleObject } from "../types";
+import SingleArticle from "./SingleArticle"
+import { ArticleObject } from "../types"
 
 
 const MainPage = function() {
@@ -9,8 +9,8 @@ const MainPage = function() {
     const [articles, setArticles] = useState<ArticleObject | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
+    const articlesURL = 'https://api.spaceflightnewsapi.net/v4/articles/'
     const getArticles = () => {
-        const articlesURL = 'https://api.spaceflightnewsapi.net/v4/articles/'
         fetch(articlesURL)
           .then((response) => {
             if (response.ok) {
@@ -29,9 +29,25 @@ const MainPage = function() {
           .catch((err) => {
             console.log(err)
           })
-      }
+    }
 
-      useEffect(() => {
+    /* esempio con async await */
+    // buonanotte
+    /* const getNews = async () => {
+        try {
+            const response = await fetch(articlesURL)
+            if (response.ok) {
+                const data = await response.json()
+                console.log('data', data)
+                setArticles(data)
+            }
+        } catch (error) {
+            console.log('Errore', error)
+        }
+    } */
+
+
+    useEffect(() => {
         getArticles()
       }, [])
 
